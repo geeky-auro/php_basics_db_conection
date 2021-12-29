@@ -202,5 +202,64 @@
   ?>
     <h3>This is my first Php website which the visible part via Inspect Element in the browser.</h3>
   </div>
+  
+<!--  For Database Connectivity-via Xampp Server and phpmyadmin  -->
+   <?php 
+    $servername = 'localhost';
+    $username = 'root';
+    $password = '';
+    $db ='testdb';
+    // First Create a testdb database http://localhost/phpmyadmin
+
+    // Create connection
+    $conn = mysqli_connect($servername, $username, $password,$db);
+    
+    // // Check connection
+    // if (!$conn) {
+    //   die("Connection failed: " . mysqli_connect_error());
+    // }
+    // echo "Connected successfully";
+
+    //  Create a table
+
+    // $sql = "CREATE TABLE MyGuests (
+    //  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    //  firstname VARCHAR(30) NOT NULL,
+    //  lastname VARCHAR(30) NOT NULL,
+    //  email VARCHAR(50),
+    //  reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    //  )";
+     
+    // Check Creation of Table
+    //  if ($conn->query($sql) === TRUE) {
+    //    echo "Table MyGuests created successfully";
+    //  } else {
+    //    echo "Error creating table: " . $conn->error;
+    //  }
+    
+    // Insert Data in the table
+    //  $sql = "INSERT INTO MyGuests (firstname, lastname, email)
+    //  VALUES ('AURO', 'KAUSHIK', 'AUROKAUSH@example.com')";
+    //  if (mysqli_query($conn, $sql)) {
+    //      echo "New record created successfully";
+    //    } else {
+    //      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    //    }
+
+    // Select all the data from the database
+    $sql = "SELECT * FROM MyGuests";
+      $result = mysqli_query($conn, $sql);
+      if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        while($row = mysqli_fetch_assoc($result)) {
+            echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "email: ". "  "  . $row["email"]. "reg_date   " . $row["reg_date"]."<br>";
+        }
+    } else {
+        echo "0 results";
+    }
+       
+     
+     $conn->close();
+    ?>
 </body>
 </html>
